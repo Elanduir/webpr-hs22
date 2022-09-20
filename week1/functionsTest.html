@@ -24,12 +24,34 @@
             function f2() {return 2;}
             function f2(arg) {return arg;} // Second declaration overwrites first declaration
 
-            document.writeln(f2()); // --> Undefinded
-            document.writeln(f2("Working function 2")) // --> Working
+            document.writeln(f2());                     // --> Undefinded
+            document.writeln(f2("Working function 2"))  // --> Working
 
             // Lambda | FatArrow Syntax
-            const lambdaF1 = () => {return "Lambda";}
-            document.writeln(lambdaF1());
+            const lambdaF1 = () => {return "Lambda";}       // correct declaration with return
+            const lambdaF2 = () => {"Lambda no return";}    // correct declaration no return value
+            const lambdaF3 = () => "Lambda";                // correct declaration with return
+
+            document.writeln(lambdaF1());                               // return Lambda
+            document.writeln((lambdaF2() === undefined).toString());    // true
+            document.writeln(lambdaF3());                               // return Lambda
+
+            // Array with functions
+            const funcArray = [null, undefined, f1, f2];
+            
+            document.writeln((funcArray[0] === null).toString());       // true --> references null
+            document.writeln((funcArray[2]() === 1).toString());        // true --> calls f1()
+            document.writeln((funcArray[3](2) === 2).toString());        // true --> calls f1()
+
+            // Function-ception
+            function brainFuck(whatDoIDo){
+                return function bla(arg){return whatDoIDo(arg);}
+            }
+
+            document.writeln(brainFuck(f2)("Fuck me"));         // returns "Fuck me" as it calls f2
+
+            const brainFuck2 = callme => arg => callme(arg);
+            document.writeln(brainFuck2(f2)("Fuck me 2"));      // returns "Fuck me 2" as it calls f2
 
 
         </script>
