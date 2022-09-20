@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang=""en>
+    <head>
+        <title>Function Tests</title>
+    </head>
+    <body>
+        <script>
+            // WriteLine to document
+            document.writeln("HelloWorld");
+
+            // WriteLine parse to string
+            document.writeln((1 === 1).toString());
+
+            // Function declaration
+            function f1() {return 1;}
+
+            // Function call
+            document.writeln(f1().toString());
+
+            // Function call with comparison && parsing
+            document.writeln((f1() === 1).toString());
+
+            // No function overloading
+            function f2() {return 2;}
+            function f2(arg) {return arg;} // Second declaration overwrites first declaration
+
+            document.writeln(f2()); // --> Undefinded
+            document.writeln(f2("Working function 2")) // --> Working
+
+            // Lambda | FatArrow Syntax
+            const lambdaF1 = () => {return "Lambda";}
+            document.writeln(lambdaF1());
+
+
+        </script>
+    </body>
+</html>
