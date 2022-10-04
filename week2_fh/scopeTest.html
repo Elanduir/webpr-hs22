@@ -5,7 +5,55 @@
     </head>
     <body>
         <script>
+            // Scope script
+            let x = 0;
+
+            // immediately invoked function expression "IIFE"
+            // fat arrow notation
+            (() => {
+                // Scope foo()
+                let x = 1;
+                document.writeln(String(x)); // Scope x: function
+            })(); // () -> Calls function immediately
+            /**
+             * Equivalent in standard notation
+             * 
+             * function foo(){
+             *      let x = 1;
+             *      document.writeln(String(x));
+             * }
+             * foo();
+             **/
+            document.writeln(String(x)); // Scope x: script
             
+            // Alpha Translation
+            // Very similar to Haskell function declaration
+            // id -> take 1 parameter and return parameter
+            const id = x => x;
+
+            // konst -> take 2 aparameter and always return first
+            const konst = x => y => x;
+            
+            // kite -> take 2 parameter and always return 2nd
+            // const kite = x => y => y;
+            
+            // erweitern um id
+            // const kite = x => y => id(y);
+            
+            // Eta reduktion
+            // const kite = x = id;
+            
+            // Erweitern um konst
+            // const kite = x = konst(id)(x);
+
+            // Eta reduktion
+            const kite = konst(id);
+
+            document.writeln(id(id) === id);                  // true
+            document.writeln(konst(id)(undefined) === id);  // true
+            document.writeln(kite(undefined)(id) === id);    // true
+
+
         </script>
     </body>
 </html>
